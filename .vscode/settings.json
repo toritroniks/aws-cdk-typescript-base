@@ -1,11 +1,13 @@
 {
   "editor.tabSize": 2,
-  "editor.formatOnSave": true,
-  "eslint.format.enable": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
   "eslint.validate": ["typescript"],
-  "[json]": {
-    "editor.defaultFormatter": "vscode.json-language-features"
+  "[typescript]": {
+    "editor.formatOnSave": false
   },
   "typescript.tsdk": "node_modules\\typescript\\lib"
 }

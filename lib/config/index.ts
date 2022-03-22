@@ -1,6 +1,6 @@
 import * as cdk from '@aws-cdk/core';
-import configDev from './config_dev';
-import configPrd from './config_prd';
+import configDev from './configDev';
+import configPrd from './configPrd';
 
 export interface Config extends cdk.StackProps {
   readonly env: cdk.Environment;
