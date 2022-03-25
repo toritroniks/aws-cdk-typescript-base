@@ -4,7 +4,7 @@ import * as ecs from '@aws-cdk/aws-ecs';
 import * as ecs_patterns from '@aws-cdk/aws-ecs-patterns';
 import * as efs from '@aws-cdk/aws-efs';
 import * as iam from '@aws-cdk/aws-iam';
-import { Config } from '../../config';
+import { Config } from '../../lib/config';
 
 export class EcsFargate extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props: Config) {

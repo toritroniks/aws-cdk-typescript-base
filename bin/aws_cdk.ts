@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 import 'source-map-support/register';
 import * as cdk from '@aws-cdk/core';
-import { EcsFargate } from '../lib/stacks/ecs-fargate';
+import { EcsFargate } from '../stacks/ecs-fargate';
 import configs, { EnvName } from '../lib/config';
-import { Vpc } from '../lib/stacks/vpc';
+import { Vpc } from '../stacks/vpc';
 
 const app = new cdk.App();
 

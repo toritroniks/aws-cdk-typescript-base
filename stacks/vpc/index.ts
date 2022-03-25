@@ -1,6 +1,6 @@
 import * as cdk from '@aws-cdk/core';
 import * as ec2 from '@aws-cdk/aws-ec2';
-import { Config } from '../../config';
+import { Config } from '../../lib/config';
 
 export class Vpc extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props: Config) {
