@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 import 'source-map-support/register';
-import * as cdk from '@aws-cdk/core';
+import { App as CdkApp } from 'aws-cdk-lib';
 import { EcsFargate } from '../stacks/ecs-fargate';
 import configs, { EnvName } from '../lib/config';
 import { Vpc } from '../stacks/vpc';
 
-const app = new cdk.App();
+const app = new CdkApp();
 
 function buildEnvStacks(env: EnvName) {
   new Vpc(app, `CdkVpc-${env}`, configs[env]);

@@ -1,13 +1,16 @@
-import * as cdk from '@aws-cdk/core';
-import * as ec2 from '@aws-cdk/aws-ec2';
-import * as ecs from '@aws-cdk/aws-ecs';
-import * as ecs_patterns from '@aws-cdk/aws-ecs-patterns';
-import * as efs from '@aws-cdk/aws-efs';
-import * as iam from '@aws-cdk/aws-iam';
+import { Construct } from 'constructs';
+import {
+  Stack,
+  aws_ec2 as ec2,
+  aws_ecs as ecs,
+  aws_efs as efs,
+  aws_iam as iam,
+  aws_ecs_patterns as ecs_patterns,
+} from 'aws-cdk-lib';
 import { Config } from '../../lib/config';
 
-export class EcsFargate extends cdk.Stack {
-  constructor(scope: cdk.Construct, id: string, props: Config) {
+export class EcsFargate extends Stack {
+  constructor(scope: Construct, id: string, props: Config) {
     super(scope, id, props);
 
     const vpc = ec2.Vpc.fromLookup(this, 'Vpc', { vpcName: 'CdkVpc-dev/Vpc' });
@@ -30,7 +33,7 @@ export class EcsFargate extends cdk.Stack {
   }
 }
 
-function prepareEFS(scope: cdk.Construct, vpc: ec2.IVpc) {
+function prepareEFS(scope: Construct, vpc: ec2.IVpc) {
   return new efs.FileSystem(scope, 'MyEfsFileSystem', {
     fileSystemName: 'CdkEfs',
     vpc: vpc,
@@ -41,7 +44,7 @@ function prepareEFS(scope: cdk.Construct, vpc: ec2.IVpc) {
   });
 }
 
-function prepareFargateTask(scope: cdk.Construct, fileSystem: efs.FileSystem) {
+function prepareFargateTask(scope: Construct, fileSystem: efs.FileSystem) {
   const taskRole = new iam.Role(scope, 'TaskRole', {
     assumedBy: new iam.ServicePrincipal('ecs-tasks.amazonaws.com'),
     inlinePolicies: {
@@ -77,7 +80,7 @@ function prepareFargateTask(scope: cdk.Construct, fileSystem: efs.FileSystem) {
   });
 }
 
-function prepareECSContainer(scope: cdk.Construct, taskDef: ecs.FargateTaskDefinition) {
+function prepareECSContainer(scope: Construct, taskDef: ecs.FargateTaskDefinition) {
   const containerDef = new ecs.ContainerDefinition(scope, 'MyContainerDefinition', {
     image: ecs.ContainerImage.fromRegistry('coderaiser/cloudcmd'),
     taskDefinition: taskDef,
@@ -93,7 +96,7 @@ function prepareECSContainer(scope: cdk.Construct, taskDef: ecs.FargateTaskDefin
 }
 
 function prepareFargateService(
-  scope: cdk.Construct,
+  scope: Construct,
   ecsCluster: ecs.Cluster,
   taskDef: ecs.FargateTaskDefinition
 ) {
